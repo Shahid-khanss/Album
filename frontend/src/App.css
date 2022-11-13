@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Quicksand&display=swap');
+
+body{
+  font-family: 'Inter', sans-serif;
+font-family: 'Quicksand', sans-serif;
+background-color: #FAF7F0;
+
+
+
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+a:hover{
+  color: #9A1663;
+}
+
+*{
+  margin: 0px;
+  padding: 0px;
+}
+.App{
+  /* width: 70vw; */
+  margin: auto;
+  margin-top: 0px;
+
+ }
+
+ .content{
+  width: 97vw;
+  /* outline: 1px solid blue; */
+  margin: auto;
+  display: flex;
+  margin-top: 100px;
+  position:absolute;
+  }
+
+ .navbar{
+  height: 65px;
+  width: 100vw;
+  background-color: #FF8787;
+  /* outline: 1px solid red; */
+  box-shadow: 2px 2px 2px 2px gray;
+  position:fixed;
+  z-index: 10;
+ }
+
+ .body{
+  margin: 0px;
+  padding: 0px;
+ }
+ .navbar{
+  display: flex;
+  align-items: center;
+  padding-inline: 10px;
+ }
+
+.navbar i{
+  padding-inline: 10px;
+}
+
+.nav-head{
+  margin-left: 10%;
+  margin-right: auto;
+}
+.nav-buttons {
+display: flex;
+margin-right: 10%;
+
+}
+.nav-buttons h2{
+  margin-inline: 10px;
+}
+
+.cards-container{
+  width: 70vw;
+  /* outline: 1px solid red; */
+  height: 100vh;
+  margin-left: 5%;
+  margin-block: 50px;
+  margin-right: auto;
+  display: flex;
+  padding-inline: 10px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  
+
+
+}
+
+.memory-card{
+  width: 300px;
+  height: 400px;
+  /* outline: 1px solid black; */
+  border-radius: 5px;
+  margin-top: 20px;
+  
+  position: relative;
+  box-shadow: 2px 2px 5px 2px rgb(185, 185, 185);
+  overflow: hidden;
+  padding: 1px;
+  margin-inline: 10px;
+  
+}
+
+.sidebar{
+  
+  /* outline: 1px soild green; */
+  /* background-color:antiquewhite; */
+  width: 310px;
+  height: 100vh;
+  margin-block: 50px;
+  margin-right: 35px;
+}
+
+
+
+.card-image{
+  height: 60%;
+  width: 100%;
+  object-fit:cover;
+}
+
+.card-content{
+  padding-inline: 5px;
+}
+
+.add-memory-form{
+  margin: auto;
+  width: 90%;
+  /* outline: 2px solid red; */
+  height: 500px;
+  box-shadow: 2px 2px 5px 2px gray;
+
+}
+
+.add-memory-form input{
+  height: 40px;
+ width: 70%;
+  margin: auto;
+display: block;
+margin-top: 10px;
+font-size: 1em;
+}
+.add-memory-form>h1{
+  /* border: 2px solid green; */
+  text-align: center;
+  padding: 10px;
+}
+.add-memory-form textarea{
+  height: 70px;
+ width: 70%;
+  margin: auto;
+display: block;
+margin-top: 10px;
+font-size: 1.5em;
+}
+
+@media only screen and (max-width: 600px) {
+  .cards-container{
+    display: block;
+    margin-top: 100px;
+  }
+.content{
+  display: block;
+}
+  .sidebar{
+    display: block;
+  }
+
+  .navbar{
+    flex-direction: column;
+    padding: 10px;
+    height: fit-content;
+     
+  }
+
+  .nav-head{
+    margin: auto;
+  }
+
+  .nav-buttons{
+    flex-direction: column;
+    padding: 10px;
+    margin: 5px;
+  }
+}
