@@ -5,43 +5,38 @@ import MemoryCard from "./MemoryCard"
 import React, { useEffect } from "react"
 import axios from "axios"
 import AddMemory from './AddMemory';
+import {useSelector, useDispatch} from "react-redux"
+import { updateForm } from './redux/cardState';
+import { getCardsdata } from './redux/cardState';
+
 
 
 function App() {
 
   const [cardsData, setCardsData] = React.useState(null)
-  const [runEffect, setRunEffect]= React.useState(false)
+  const state = useSelector(state=>state)
+  const dispatch = useDispatch()
+    let cardsArray = []
+    console.log(state)
+    console.log("outside render")
+    // get data
+    
+   useEffect(()=>{
+    dispatch(getCardsdata())
 
-  let cardsArray = []
+   }, [state.uploading || state.deleting])  // whenerver state.uploading flag changes useEffect re-renders
 
-  console.log("outside render")
-  // get data
-  React.useEffect(() => {
-    console.log("inside render")
-   
-    axios.get("http://192.168.0.111:4000/api")
-      .then((res) => {
-
-        setCardsData(res.data)
-
-      })
-      .catch(err => console.log(err))
-
-  }, [runEffect])
-
-
-  if (cardsData) {
-    cardsArray = cardsData.map((card) => {
+   //** If you want to re-render useEffect (to get realtime data feed) just put a changeable flag of global state in the second argument array. like flag "delete" will change if we delete and so on
+   // we dont need to call axios from outside we can do here also just remember to use flags to re-render the axios.get to get real-time data feed */
+    
+  
+  if (state) {
+    cardsArray = state.data.map((card) => {
       return (<MemoryCard
-        render={setRunEffect}
         data={card}
         key={card._id} />)
     })
   }
-
-
-
-
 
 
   return (
@@ -53,7 +48,7 @@ function App() {
           {cardsArray}
         </div>
         <div className="sidebar">
-          <AddMemory render={setRunEffect} />
+          <AddMemory/>
         </div>
       </div>
     </div>

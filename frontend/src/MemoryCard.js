@@ -1,19 +1,20 @@
 import axios from 'axios'
 import React from 'react'
-
+import { useDispatch } from 'react-redux'
+import {deleteCard} from "../src/redux/cardState"
 
 
 
 
 const MemoryCard = (props) => {
 
-
+const dispatch = useDispatch()
 
     function handleDelete() {
         alert("Are you sure you want to delete")
         axios.delete(`http://192.168.0.111:4000/api/${props.data._id}`).then(res => {
             alert(`Following data deleted : ${JSON.stringify(res.data)}`)
-            props.render(prev=>!prev)
+            dispatch(deleteCard())
         })
             .catch(err => console.log(err))
     }

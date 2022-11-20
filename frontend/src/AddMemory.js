@@ -1,4 +1,6 @@
-import axios, { Axios } from 'axios'
+import { useDispatch } from 'react-redux'
+import { postCardsdata } from './redux/cardState'
+import axios from 'axios'
 import React from 'react'
 const AddMemory = (props) => {
 
@@ -11,7 +13,9 @@ const AddMemory = (props) => {
     }
     )
 
-console.log(formData)
+    
+const dispatch = useDispatch()
+// console.log(formData)
     function handleChange(event) {
         
         setFormData((prev) => {
@@ -24,13 +28,13 @@ console.log(formData)
 
     function handleSubmit(event) {
         event.preventDefault()
-
-
-        axios.post("http://192.168.0.111:4000/api",formData, {headers : {'Content-Type' : "multipart/form-data"}})
-        .then(data=>{
-            alert("Data Saved")
-            props.render(prev=>!prev)                    // just to re-render the main component useEffect at any change in effect state
-           }).catch(err=>console.log(err))
+        
+        dispatch(postCardsdata(formData))
+        // axios.post("http://192.168.0.111:4000/api",formData, {headers : {'Content-Type' : "multipart/form-data"}})
+        // .then(data=>{
+        //     alert("Data Saved")
+            
+        //   }).catch(err=>console.log(err))
 
     }
 
