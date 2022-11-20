@@ -42,10 +42,11 @@ connectToDb(process.env.MONGOCONNECT, ()=>{
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'))
-app.use(morgan("tiny"))
+app.use(morgan("dev"))
 app.use(upload.single('pics'))
 
 
 
 // Routes
-app.use(`/`, require("./routes/router.js"))
+app.use(`/api`, require("./routes/cardRouter.js"))
+app.use(`/api`, require("./routes/authRouter.js"))

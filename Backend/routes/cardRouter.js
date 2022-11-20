@@ -1,6 +1,6 @@
 const express = require("express")
-const controller = require("../controller/controller")
-const router = express.Router()
+const cardController = require("../controller/cardController")
+
 // const multer = require("multer")
 
 // const diskStorage = multer.diskStorage({
@@ -14,11 +14,15 @@ const router = express.Router()
 
 // var upload = multer({storage : diskStorage})
 
+const cardRouter = express.Router() // main router
 
-router.get(`/api`, controller.find)
 
-router.post(`/api`,  controller.addData)
 
-router.delete(`/api/:id`, controller.deleteData)
+cardRouter.get(`/`, cardController.find)
+cardRouter.post(`/`,  cardController.addData)
+cardRouter.delete(`/:id`, cardController.deleteData)
 
-module.exports =  router;
+
+
+
+module.exports = cardRouter
