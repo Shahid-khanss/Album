@@ -33,8 +33,13 @@ function handleChange(event){
     }
     }
     async function handleLogin(event){
-        event.preventDefault()
-        axios.post(`${process.env.REACT_APP_SERVER}/api/login`, formData)
+        try {event.preventDefault()
+       const response = await axios.post(`${process.env.REACT_APP_SERVER}/api/login`, formData)
+       localStorage.setItem("token" , JSON.stringify(response.data))
+    }catch(error){
+        if(error)
+        setError(error.response.data)
+    }
     }
 
     return (
@@ -48,7 +53,7 @@ function handleChange(event){
                     <div className="input-field">
                         <input type="password" placeholder="password" autoComplete="nope" name='password' value={formData.password} onChange={handleChange} />
                     </div>
-                    {error && <p>{error}</p>}
+                    {error && <p style={{"background-color" : "#faa2a2", "padding" : "10px 2px", "border-radius" : "5px"}}>{error}</p>}
                 </div>
                 <div className="action">
                     <button onClick={handleRegister}>Register</button>
