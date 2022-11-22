@@ -106,7 +106,7 @@ export const formReducer = (state = initialState, action) => {
 export const getCardsdata = () => {
     return function (dispatch) {
         dispatch(fetchCardsRequest())
-        axios.get("http://192.168.0.111:4000/api")
+        axios.get(`${process.env.REACT_APP_SERVER}/api`)
             .then((res) => {
                 dispatch(fetchCardsSuccess(res.data))
             })
@@ -118,7 +118,7 @@ export const getCardsdata = () => {
 export const postCardsdata = (payload) => {
     return function (dispatch) {
         dispatch(postCardsRequest())
-        axios.post("http://192.168.0.111:4000/api", payload, { headers: { 'Content-Type': "multipart/form-data" } })
+        axios.post(`${process.env.REACT_APP_SERVER}/api`, payload, { headers: { 'Content-Type': "multipart/form-data" } })
             .then(data => {
                 dispatch(postCardsDone())
             }).catch(err => console.log(err))

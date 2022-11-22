@@ -12,7 +12,7 @@ const dispatch = useDispatch()
 
     function handleDelete() {
         alert("Are you sure you want to delete")
-        axios.delete(`http://192.168.0.111:4000/api/${props.data._id}`).then(res => {
+        axios.delete(`${process.env.REACT_APP_SERVER}/api/${props.data._id}`).then(res => {
             alert(`Following data deleted : ${JSON.stringify(res.data)}`)
             dispatch(deleteCard())
         })
@@ -24,7 +24,7 @@ const dispatch = useDispatch()
     return (
         <div>
             <div className="memory-card">
-                <img className="card-image" src={`http://192.168.0.111:4000/uploads/${props.data.pics}`} alt="img" />
+                <img className="card-image" src={`${process.env.REACT_APP_SERVER}/uploads/${props.data.pics}`} alt="img" />
                 <button onClick={handleDelete}
                     style={{ position: "absolute", top: "5px", right: "5px", fontSize: "1.5em", padding: "5px" }}>
                     <i className="fa-solid fa-trash"></i>
