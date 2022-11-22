@@ -25,7 +25,7 @@ function handleChange(event){
     
     async function handleRegister(event){
         try {event.preventDefault()
-       const response = await axios.post("http://localhost:4000/register", formData)
+       const response = await axios.post(`${process.env.REACT_APP_SERVER}/api/register`, formData)
        localStorage.setItem("token" , JSON.stringify(response.data))
     }catch(error){
         if(error)
@@ -34,7 +34,7 @@ function handleChange(event){
     }
     async function handleLogin(event){
         event.preventDefault()
-        axios.post("http://localhost:4000/login", formData)
+        axios.post(`${process.env.REACT_APP_SERVER}/api/login`, formData)
     }
 
     return (
