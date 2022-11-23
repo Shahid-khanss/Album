@@ -18,8 +18,8 @@ function App() {
   const state = useSelector(state => state.formReducer)
   const dispatch = useDispatch()
   let cardsArray = []
-  console.log(state)
-  console.log("outside render")
+  // console.log(state)
+  // console.log("outside render")
   // get data
 
   useEffect(() => {
