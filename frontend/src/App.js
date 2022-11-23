@@ -15,7 +15,7 @@ import Login from './Login'
 function App() {
 
   const [cardsData, setCardsData] = React.useState(null)
-  const state = useSelector(state => state)
+  const state = useSelector(state => state.formReducer)
   const dispatch = useDispatch()
   let cardsArray = []
   console.log(state)

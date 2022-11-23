@@ -7,9 +7,10 @@ import { createStore } from "redux"
 import { formReducer, updateForm } from "./redux/cardState"
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import {rootReducer} from './redux/index'
 
 
-const store = createStore(formReducer,applyMiddleware(thunk))
+const store = createStore(rootReducer,applyMiddleware(thunk))
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

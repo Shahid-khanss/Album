@@ -1,9 +1,9 @@
-import redux from 'redux'
+import {combineReducers} from 'redux'
 
 import { authReducer } from './authReducer'
 import { formReducer } from './cardState'
 
-export const rootReducer = redux.combineReducers({
+export const rootReducer = combineReducers({
     authReducer,
     formReducer
 })
