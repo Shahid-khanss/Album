@@ -20,11 +20,13 @@ function App() {
   // console.log(state)
   // console.log("outside render")
   // get data
-console.log(state)
-  useEffect(() => {
+
+
+  console.log(state)
+  useEffect(()=> {
     dispatch(fetchCards())
 
-  }, [])  // whenerver state.uploading flag changes useEffect re-renders
+  }, [state.status.uploading, state.status.deleting])  // whenerver state.uploading flag changes useEffect re-renders
 
   //** If you want to re-render useEffect (to get realtime data feed) just put a changeable flag of global state in the second argument array. like flag "delete" will change if we delete and so on
   // we dont need to call axios from outside we can do here also just remember to use flags to re-render the axios.get to get real-time data feed */
@@ -51,7 +53,7 @@ console.log(state)
               <div className="content">
 
                 <div className="cards-container">
-                  {cardsArray}
+                  {state.status.downloading ? <h1>Loading</h1> : cardsArray}
                 </div>
                 <div className="sidebar">
                   <AddMemory />
