@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import './Login.css'
-import { loginRequest, loginSuccess, authReducer } from './redux/authReducer'
+// import { loginRequest, loginSuccess, authReducer } from './redux/authReducer'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Login = () => {

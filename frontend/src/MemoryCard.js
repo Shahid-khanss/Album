@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import {deleteCard} from "../src/redux/cardState"
+import { fetchCards, postCards, deleteCards } from './redux-features/cardSlice'
 
 
 
@@ -12,11 +12,7 @@ const dispatch = useDispatch()
 
     function handleDelete() {
         alert("Are you sure you want to delete")
-        axios.delete(`${process.env.REACT_APP_SERVER}/api/${props.data._id}`).then(res => {
-            alert(`Following data deleted : ${JSON.stringify(res.data)}`)
-            dispatch(deleteCard())
-        })
-            .catch(err => console.log(err))
+        dispatch(deleteCards(props.data._id))
     }
 
 

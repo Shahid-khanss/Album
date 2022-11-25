@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
-import { postCardsdata } from './redux/cardState'
 import axios from 'axios'
 import React from 'react'
+import { fetchCards, postCards, deleteCards } from './redux-features/cardSlice'
 const AddMemory = (props) => {
 
     const [formData, setFormData] = React.useState({
@@ -29,12 +29,8 @@ const dispatch = useDispatch()
     function handleSubmit(event) {
         event.preventDefault()
         
-        dispatch(postCardsdata(formData))
-        // axios.post("http://192.168.0.111:4000/api",formData, {headers : {'Content-Type' : "multipart/form-data"}})
-        // .then(data=>{
-        //     alert("Data Saved")
-            
-        //   }).catch(err=>console.log(err))
+        dispatch(postCards()) // redux-features / cardSlice
+        
 
     }
 
