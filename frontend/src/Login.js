@@ -14,7 +14,7 @@ const Login = () => {
 
     const [error, setError] = React.useState(null)
 
-    const state = useSelector(state => state.authReducer) // selecting state of  authReducer
+    const state = useSelector(state => state.authReducer) // selecting state of authReducer (userstate)
     const dispatch = useDispatch() // initialize dispatch
 
     console.log(state)
@@ -59,7 +59,7 @@ const Login = () => {
                     <div className="input-field">
                         <input type="password" placeholder="password" autoComplete="nope" name='password' value={formData.password} onChange={handleChange} />
                     </div>
-                    {error && <p style={{ "backgroundColor": "#faa2a2", "padding": "10px 2px", "borderRadius": "5px" }}>{error}</p>}
+                    {state.error && <p style={{ "backgroundColor": "#faa2a2", "padding": "10px 2px", "borderRadius": "5px" }}>{state.error}</p>}
                 </div>
                 <div className="action">
                     <button onClick={handleRegister}>Register</button>
