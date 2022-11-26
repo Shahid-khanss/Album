@@ -7,7 +7,7 @@ import axios from "axios"
 import AddMemory from './AddMemory';
 import { useSelector, useDispatch } from "react-redux"
 import { fetchCards, postCards, deleteCards } from './redux-features/cardSlice'
-// import Login from './Login'
+import Login from './Login'
 
 
 
@@ -22,7 +22,7 @@ function App() {
   // get data
 
 
-  console.log(state)
+  // console.log(state)
   useEffect(()=> {
     dispatch(fetchCards())
 
@@ -61,9 +61,9 @@ function App() {
               </div>
             </div>} />
 
-            {/* <Route 
+            <Route 
             path='/login' 
-            element={<Login/>} /> */}
+            element={<Login/>} />
 
         </Routes>
       </BrowserRouter>

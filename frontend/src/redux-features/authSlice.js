@@ -1,57 +1,49 @@
 // Whenever there is sideEffect from the outside that is responsible for state change, like post or get from server. we use flags, in state like loading. req, success and failure.
-
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import axios from "axios"
 
 const initialState = {
-    user: null,
-    loading : false
+    user: "",
+    status: {
+        idle: true,
+        loggedIn: false,
+        loggedOut: false,
+    },
+    error : "",
 }
 
 
-function loginRequest(){
-    return{
-        type : "LOGIN_REQ"
-    }
-}
+export const register = createAsyncThunk('auth/register', async (userData) => {
+    
+    const userToken = await axios.post(`${process.env.REACT_APP_SERVER}/api/register`,userData)
+    return userToken // returned as action.payload if fullfilled, its only action reducer is defined below based on this action.
+    
+})
+export const login = createAsyncThunk('auth/login', async (userData) => {
 
-function loginSuccess(payload) {
-    return {
-        type: "LOGIN_SUCCESS",
-        payload: payload
-    }
-}
+    const userToken = await axios.post(`${process.env.REACT_APP_SERVER}/api/login`, userData)
+    return userToken // returned as action.payload if fullfilled, its only action reducer is defined below based on this action.
+})
 
-function logoutReq() {
-    return {
-        type: "LOGOUT_REQ"
+const authSlice = createSlice({
+    name: 'auth',
+    initialState,
+    extraReducers: (builder) => {
+        builder.addCase(register.pending, (state, action) => {
+            state.idle = false
+           
+        })
+        builder.addCase(register.fulfilled, (state, action) => {
+            localStorage.setItem("user", JSON.stringify(action.payload.data))
+            state.user = action.payload.data
+            state.idle = true
+            state.loggedIn = true
+            state.status.loggedOut = false
+        })
+        builder.addCase(register.rejected, (state, action) => {
+           state.error = action
+        })
     }
-}
-function logoutSuccess() {
-    return {
-        type: "LOGOUT_SUCEESS"
-    }
-}
-const authReducer = (state=initialState, action)=>{
-    switch(action.type){
-        case "LOGIN_REQ" : return {
-            ...state,loading : true
-        }
-        case "LOGIN_SUCCESS" : return {
-            user : action.payload, loading : false
-        }
-        case "LOGOUT_REQ" : return {
-            ...state, loading : true
-        }
-        case "LOGOUT_SUCCESS" : return {
-            state : null, loading : false
-        }
-        default : return state
-    }
-}
+})
 
-export {
-    loginRequest, 
-    loginSuccess, 
-    logoutReq, 
-    logoutSuccess, 
-    authReducer
-}
+export default authSlice.reducer
