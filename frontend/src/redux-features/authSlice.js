@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import axios from "axios"
 
 const initialState = {
-    user: "",
+    user: null,
     status: {
         idle: true,
         loggedIn: false,
@@ -55,7 +55,28 @@ export const login = createAsyncThunk('auth/login', async (userData, {rejectWith
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    extraReducers: (builder) => {
+    reducers : {                                                              // normal reducer for inside actions here action is checkStorage which this redux toolkit creates itself
+        checkStorage :  (state)=>{
+            const token =  JSON.parse(localStorage.getItem('user'))         // chekcing token data in localstorage  
+            if(token){
+            state.user = JSON.parse(localStorage.getItem('user'))
+            state.status.idle = true
+            state.status.loggedIn = true
+            state.status.loggedOut = false
+            }
+        },
+
+        logout : (state)=>{
+            localStorage.removeItem('user')
+            state.user = null
+            state.status.idle = true
+            state.status.loggedIn = false
+            state.status.loggedOut = true
+
+        }
+    },
+
+    extraReducers: (builder) => {                                       // reducers For outside action creaters
         builder.addCase(register.pending, (state, action) => {
             state.status.idle = false
            
@@ -88,3 +109,4 @@ const authSlice = createSlice({
 })
 
 export default authSlice.reducer
+export const {checkStorage, logout} = authSlice.actions

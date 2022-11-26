@@ -43,7 +43,7 @@ a:hover{
   background-color: #FF8787;
   /* outline: 1px solid red; */
   box-shadow: 2px 2px 2px 2px gray;
-  position:fixed;
+  /* position:fixed; */
   z-index: 10;
  }
 
