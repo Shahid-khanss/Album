@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import axios from "axios"
 
 const initialState = {
-    user: null, // {user,token}
+    user: null, // {user : "",token : ""}
     status: {
         idle: true,
         loggedIn: false,
