@@ -7,9 +7,9 @@ const privateKey = fs.readFileSync("./Keys/rsa_priv.pem")
 exports.register = async (req,res)=>{
     console.log(req.body)
     try{
-        const user = await User.register(req.body.email,req.body.password)
-        const Token = await jwt.sign({_id : user.id}, privateKey)
-        res.status(200).json({user : user.email, token : Token})
+        const user = await User.register(req.body.email,req.body.password)  // static function calling
+        const Token = await jwt.sign({_id : user.id}, privateKey, {algorithm : 'RS256'})// Signing JWT token with payload and RS256 hashing algo.
+        res.status(200).json({message : "successfully logged in", user : user.email, token : Token}) 
     }catch(error){
         console.log(error.message)
         res.status(400).json({"error" : error.message})

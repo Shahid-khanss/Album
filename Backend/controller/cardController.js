@@ -9,26 +9,30 @@ exports.find = ((req,res)=>{
         .then(data=>res.send(data)).catch(err=>console.log(err))
     }
     
-    db.find()
+    db.find({user_id : req.user_id})
     .then(data=> res.status(200).send(data))
     .catch(err=>console.log(err))
 })
 
 exports.addData = (req,res)=>{
  
- console.log(req.file)
+//  console.log(req.file)
+    
+
     const newData = new db(
         {
             name : req.body.name,
             place : req.body.place,
             pics : req.file.filename,
             content : req.body.content,
-            email : req.body.email
+            email : req.body.email,
+            user_id : req.user_id // from middleware
    
         }
     ) 
     newData.save()
     .then(data=>res.status(200).json(data)).catch(err=>console.log(err))
+    
 }
 
 exports.deleteData = (req,res)=>{

@@ -10,7 +10,9 @@ var schema = new mongoose.Schema(
 
         content : {type : String, required : true},
 
-        email : {type : String, required : true}
+        email : {type : String, required : true},
+
+        user_id : {type : String}
     }
 );
 
