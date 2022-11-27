@@ -8,7 +8,7 @@ exports.register = async (req,res)=>{
     console.log(req.body)
     try{
         const user = await User.register(req.body.email,req.body.password)
-        const Token = await jwt.sign(user.id, privateKey)
+        const Token = await jwt.sign({_id : user.id}, privateKey)
         res.status(200).json({user : user.email, token : Token})
     }catch(error){
         console.log(error.message)
@@ -39,7 +39,7 @@ exports.login = async (req,res)=>{
     
     try{
         const user = await User.login(req.body.email,req.body.password)
-        const Token = await jwt.sign(user.id, privateKey)
+        const Token = await jwt.sign({_id : user.id}, privateKey, {algorithm : 'RS256'})
         res.status(200).json({message : "successfully logged in", user : user.email, token : Token})
     }catch(error){
         console.log(error.message)

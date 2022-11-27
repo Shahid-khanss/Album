@@ -1,5 +1,6 @@
 const express = require("express")
 const cardController = require("../controller/cardController")
+const {userAuth} = require("../middlewares/userAuth")
 
 // const multer = require("multer")
 
@@ -17,10 +18,10 @@ const cardController = require("../controller/cardController")
 const cardRouter = express.Router() // main router
 
 
-
-cardRouter.get(`/`, cardController.find)
-cardRouter.post(`/`,  cardController.addData)
-cardRouter.delete(`/:id`, cardController.deleteData)
+cardRouter.use('/cards',userAuth)
+cardRouter.get(`/cards`, cardController.find)
+cardRouter.post(`/cards`,  cardController.addData)
+cardRouter.delete(`/cards/:id`, cardController.deleteData)
 
 
 

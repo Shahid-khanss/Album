@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import axios from "axios"
 
 const initialState = {
-    user: null,
+    user: null, // {user,token}
     status: {
         idle: true,
         loggedIn: false,
@@ -57,7 +57,7 @@ const authSlice = createSlice({
     initialState,
     reducers : {                                                              // normal reducer for inside actions here action is checkStorage which this redux toolkit creates itself
         checkStorage :  (state)=>{
-            const token =  JSON.parse(localStorage.getItem('user'))         // chekcing token data in localstorage  
+            const token =  JSON.parse(localStorage.getItem('user'))         // chekcing token data in localstorage after refreshing the page 
             if(token){
             state.user = JSON.parse(localStorage.getItem('user'))
             state.status.idle = true
